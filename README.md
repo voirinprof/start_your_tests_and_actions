@@ -112,17 +112,14 @@ reconstruire ce dont elle a besoin, dans l'ordre :
 2. **`actions/setup-python@v5`** — installe Python 3.10.
 3. **Installer les dépendances** — `pip install pytest pytest-cov`, comme vous
    le faites localement avec `requirements.txt`.
-4. **Lancer les tests avec couverture** — la même commande
-   `pytest tests/ --cov=src --cov-report=term-missing -v` que vous utilisez
-   sur votre machine. C'est là que le workflow échoue (❌) ou réussit (✅) :
-   si un seul test échoue, `pytest` retourne un code d'erreur et le job est
-   marqué en échec.
+4. **Lancer les tests avec couverture** — une commande proche de celle que
+   vous utilisez en local, avec en plus `--cov-report=xml` pour générer un
+   fichier `coverage.xml` (en plus de l'affichage `term-missing` dans les
+   logs). C'est là que le workflow échoue (❌) ou réussit (✅) : si un seul
+   test échoue, `pytest` retourne un code d'erreur et le job est marqué en
+   échec.
 5. **`actions/upload-artifact@v4`** (`if: always()`, donc exécutée même si les
-   tests échouent) — sauvegarde un fichier `coverage.xml` téléchargeable
+   tests échouent) — sauvegarde ce `coverage.xml`, téléchargeable ensuite
    depuis l'onglet *Actions* du dépôt GitHub, pour consulter le rapport de
    couverture après coup.
-
-> ⚠️ Avec la commande actuelle (`--cov-report=term-missing`), `coverage.xml`
-> n'est pas généré : cette étape échouera. Pour qu'elle fonctionne, ajoutez
-> `xml` au rapport, par exemple `--cov-report=term-missing --cov-report=xml`.
 
