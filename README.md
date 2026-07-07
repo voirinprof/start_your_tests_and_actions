@@ -123,3 +123,4 @@ reconstruire ce dont elle a besoin, dans l'ordre :
    depuis l'onglet *Actions* du dépôt GitHub, pour consulter le rapport de
    couverture après coup.
 
+# test
